@@ -9,11 +9,21 @@ yellowColour="\e[0;33m\033[1m"
 #CNTRL+C
 function ctrl_c(){
   echo -e "\n\n${redColour}[!] Sortint...${endColour}"
-  tput cnorm
   exit 1
 }
 
 trap ctrl_c INT
+
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+LOCKFILE="/tmp/backup_script.lock"
+
+# Comprovar si ja hi ha una instància en execució
+if [ -e "$LOCKFILE" ]; then
+    echo -e "${redColour}[!] Ja hi ha una instància del script en execució. Sortint...${endColour}"
+    exit 1
+else
+    touch "$LOCKFILE"
+fi
 
 # Menu d'ajuda
 function show_help() {
@@ -24,12 +34,10 @@ function show_help() {
     echo "  -l: Camí complet al fitxer de log."
     echo "  -n: Mode --dry-run (simula l'operació sense fer canvis)."
     echo "  -h: Mostra ajuda."
-    tput cnorm
     exit 0
 }
 
 # Validar els paràmetres d'entrada
-tput civis #Oculta el cursor
 
 DRY_RUN=""
 
@@ -47,18 +55,19 @@ done
 # Validacio de prerequisits 
 if [[ -z "$ORIGEN" || -z "$DESTI" || -z "$LOG" ]]; then
     echo -e "${redColour}Error 1: Cal especificar el origen, destí i el fitxer de log.${endColour}"
+    rm -rf "$LOCKFILE"
     show_help
 fi
 
 if [[ ! -d "$ORIGEN" ]]; then 
     echo -e "${redColour}Error 2: El directori d'origne no existeix.${endColour}"
-    tput cnorm
+    rm -rf "$LOCKFILE"
     exit 1
 fi
 
 if [[ ! -d "$DESTI" ]]; then 
     echo -e "${redColour}Error 3: El directori de destí no existeix.${endColour}"
-    tput cnorm
+    rm -rf "$LOCKFILE"
     exit 1
 fi
 
@@ -88,13 +97,16 @@ if [ $estatus -eq 0 ]; then
         # Protegir el fitxer de hash
         chmod 400 "$DESTI/backup_hashes.sha256"
     fi
-    echo -e "${greenColour}[+] Procés finalitzat correctament.${endColour}"
     echo "$(date '+%Y-%m-%d %H:%M:%S') [+] Còpia de seguretat i verificació completades amb èxit." >> "$LOG"
 else
     echo -e "${redColour}[!] Error en la còpia de seguretat. Revisa el log: $LOG${endColour}"
     echo "$(date '+%Y-%m-%d %H:%M:%S') [!] Error en la còpia de seguretat. Codi d'error: $estatus" >> "$LOG"
-    tput cnorm
+    rm -rf "$LOCKFILE"
     exit $estatus
 fi
 
-tput cnorm # Recupera el cursor
+echo -e "${greenColour}[+] Procés finalitzat correctament.${endColour}"
+rm -rf "$LOCKFILE"
+exit 0 
+
+

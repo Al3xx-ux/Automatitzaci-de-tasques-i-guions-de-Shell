@@ -1,0 +1,11 @@
+2026-02-21 22:05:46 [+] Iniciant copia de seguretat incremental d'/home/adria/Desktop/Automatitzaci-de-tasques-i-guions-de-Shell/practica-automatitzacio/dades_origen/ a /home/adria/Desktop/Automatitzaci-de-tasques-i-guions-de-Shell/practica-automatitzacio/dades_destinacio/
+sending incremental file list
+./
+test1.txt
+test2.txt
+
+sent 226 bytes  received 57 bytes  566,00 bytes/sec
+total size is 38  speedup is 0,13
+2026-02-21 22:05:46 [+] Còpia de seguretat completada amb èxit.
+2026-02-21 22:05:46 [+] Generant hash SHA256 del contingut del directori de destí.
+2026-02-21 22:05:46 [+] Còpia de seguretat i verificació completades amb èxit.
