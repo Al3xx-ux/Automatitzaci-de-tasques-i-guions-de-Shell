@@ -9,3 +9,13 @@ total size is 38  speedup is 0,13
 2026-02-21 22:05:46 [+] Còpia de seguretat completada amb èxit.
 2026-02-21 22:05:46 [+] Generant hash SHA256 del contingut del directori de destí.
 2026-02-21 22:05:46 [+] Còpia de seguretat i verificació completades amb èxit.
+2026-02-22 13:20:15 [+] Iniciant copia de seguretat incremental d'/home/adria/Desktop/Automatitzaci-de-tasques-i-guions-de-Shell/practica-automatitzacio/dades_origen/ a /home/adria/Desktop/Automatitzaci-de-tasques-i-guions-de-Shell/practica-automatitzacio/dades_destinacio/
+sending incremental file list
+deleting backup_hashes.sha256
+./
+
+sent 96 bytes  received 39 bytes  270,00 bytes/sec
+total size is 38  speedup is 0,28
+2026-02-22 13:20:15 [+] Còpia de seguretat completada amb èxit.
+2026-02-22 13:20:15 [+] Generant hash SHA256 del contingut del directori de destí.
+2026-02-22 13:20:15 [+] Còpia de seguretat i verificació completades amb èxit.
