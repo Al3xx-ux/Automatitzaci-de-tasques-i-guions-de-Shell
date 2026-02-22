@@ -1,0 +1,6 @@
+[Unit]
+Description=Servei de Backup
+
+[Service]
+Type=oneshot
+ExecStart=/home/$USER/Desktop/Automatitzaci-de-tasques-i-guions-de-Shell/practica-automatitzacio/scripts/backup.sh -o /home/$USER/Desktop/Automatitzaci-de-tasques-i-guions-de-Shell/practica-automatitzacio/dades_origen/ -d /home/$USER/Desktop/Automatitzaci-de-tasques-i-guions-de-Shell/practica-automatitzacio/dades_destinacio/ -l /home/adria/Desktop/Automatitzaci-de-tasques-i-guions-de-Shell/practica-automatitzacio/serveis/log/backup.log
