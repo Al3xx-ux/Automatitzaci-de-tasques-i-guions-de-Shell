@@ -1,1 +1,2 @@
-EXECUCIO: while true; do ./monitor.sh ; sleep 1; done
+
+EXECUCIO: while true; do ./monitor.sh ; sleep 2 && clear; done

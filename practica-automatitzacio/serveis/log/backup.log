@@ -19,3 +19,11 @@ total size is 38  speedup is 0,28
 2026-02-22 13:20:15 [+] Còpia de seguretat completada amb èxit.
 2026-02-22 13:20:15 [+] Generant hash SHA256 del contingut del directori de destí.
 2026-02-22 13:20:15 [+] Còpia de seguretat i verificació completades amb èxit.
+2026-02-22 18:22:31 [+] Iniciant copia de seguretat incremental d'./dades_origen a ./dades_destinacio
+sending incremental file list
+deleting backup_hashes.sha256
+
+sent 94 bytes  received 36 bytes  260,00 bytes/sec
+total size is 38  speedup is 0,29
+2026-02-22 18:22:31 [+] Generant hash SHA256 del contingut del directori de destí.
+2026-02-22 18:22:31 [+] Còpia de seguretat i verificació completades amb èxit.

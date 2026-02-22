@@ -81,8 +81,9 @@ rsync -avz $DRY_RUN --delete "$ORIGEN/" "$DESTI/" >> "$LOG" 2>&1
 estatus=$?
 
 if [ $estatus -eq 0 ]; then 
-    echo -e "${greenColour}$(date '+%Y-%m-%d %H:%M:%S') [+] Còpia de seguretat completada amb èxit.${endColour}"
-    echo "$(date '+%Y-%m-%d %H:%M:%S') [+] Còpia de seguretat completada amb èxit." >> "$LOG"
+    # Notificació d'èxit al log del sistema
+    logger -t backup_script -p user.info "Copia de seguretat d'$ORIGEN a $DESTI completada amb èxit."
+
 
     if [[ -z "$DRY_RUN" ]]; then
         # Aplicar restricions al desti
@@ -99,8 +100,9 @@ if [ $estatus -eq 0 ]; then
     fi
     echo "$(date '+%Y-%m-%d %H:%M:%S') [+] Còpia de seguretat i verificació completades amb èxit." >> "$LOG"
 else
-    echo -e "${redColour}[!] Error en la còpia de seguretat. Revisa el log: $LOG${endColour}"
-    echo "$(date '+%Y-%m-%d %H:%M:%S') [!] Error en la còpia de seguretat. Codi d'error: $estatus" >> "$LOG"
+    echo -e "${redColour}[!] Error en la còpia de seguretat. Notificant incident...${endColour}"
+    logger -t backup_script -p user.err "Error en la còpia de seguretat d'$ORIGEN a $DESTI amb el codi $estatus. Revisar el $LOG per més detalls."
+    cp "$LOG" "${LOG}.$(date +%Y%m%d_%H%M).evidence"
     rm -rf "$LOCKFILE"
     exit $estatus
 fi
